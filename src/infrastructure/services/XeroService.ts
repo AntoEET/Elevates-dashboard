@@ -244,11 +244,16 @@ export class XeroService {
     const report = response.body.reports?.[0];
 
     // Simplified parsing - in production, parse the full report structure
+    const updatedDate = report?.updatedDateUTC;
+    const updatedDateStr = updatedDate instanceof Date
+      ? updatedDate.toISOString()
+      : (updatedDate || new Date().toISOString());
+
     return {
       reportID: report?.reportID || '',
       reportName: report?.reportName || 'Balance Sheet',
       reportDate: report?.reportDate || dateStr || new Date().toISOString(),
-      updatedDateUTC: report?.updatedDateUTC || new Date().toISOString(),
+      updatedDateUTC: updatedDateStr,
       assets: {
         current: 0, // Parse from report.rows
         fixed: 0,
@@ -278,12 +283,17 @@ export class XeroService {
     const report = response.body.reports?.[0];
 
     // Simplified parsing - in production, parse the full report structure
+    const updatedDate = report?.updatedDateUTC;
+    const updatedDateStr = updatedDate instanceof Date
+      ? updatedDate.toISOString()
+      : (updatedDate || new Date().toISOString());
+
     return {
       reportID: report?.reportID || '',
       reportName: report?.reportName || 'Profit & Loss',
       fromDate: fromDateStr,
       toDate: toDateStr,
-      updatedDateUTC: report?.updatedDateUTC || new Date().toISOString(),
+      updatedDateUTC: updatedDateStr,
       revenue: 0, // Parse from report.rows
       cogs: 0,
       grossProfit: 0,
