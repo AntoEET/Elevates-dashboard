@@ -168,11 +168,11 @@ export class XeroService {
         code: acc.code!,
         name: acc.name!,
         type: acc.type as any,
-        currencyCode: acc.currencyCode || 'GBP',
+        currencyCode: String(acc.currencyCode || 'GBP'),
         taxType: acc.taxType,
         enablePaymentsToAccount: acc.enablePaymentsToAccount,
         bankAccountNumber: acc.bankAccountNumber,
-        status: acc.status,
+        status: acc.status ? String(acc.status) : undefined,
         description: acc.description,
       }));
   }
