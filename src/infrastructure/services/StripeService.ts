@@ -282,20 +282,20 @@ export class StripeService {
         const invoiceAny = invoice as any;
         invoices.push({
           id: invoice.id,
-          customer: typeof invoice.customer === 'string' ? invoice.customer : invoice.customer?.id || '',
-          subscription: typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id || null,
-          status: invoice.status as any,
-          created: invoice.created,
+          customer: typeof invoiceAny.customer === 'string' ? invoiceAny.customer : invoiceAny.customer?.id || '',
+          subscription: typeof invoiceAny.subscription === 'string' ? invoiceAny.subscription : invoiceAny.subscription?.id || null,
+          status: invoiceAny.status as any,
+          created: invoiceAny.created,
           dueDate: invoiceAny.due_date || null,
           amountDue: invoiceAny.amount_due || 0,
           amountPaid: invoiceAny.amount_paid || 0,
           amountRemaining: invoiceAny.amount_remaining || 0,
-          currency: invoice.currency,
+          currency: invoiceAny.currency,
           periodStart: invoiceAny.period_start || null,
           periodEnd: invoiceAny.period_end || null,
           hostedInvoiceUrl: invoiceAny.hosted_invoice_url || null,
           invoicePdf: invoiceAny.invoice_pdf || null,
-          metadata: invoice.metadata,
+          metadata: invoiceAny.metadata,
         });
       }
 
