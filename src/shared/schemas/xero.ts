@@ -83,7 +83,7 @@ export const XeroProfitLossSchema = z.object({
   revenue: z.number(),
   cogs: z.number(),
   grossProfit: z.number(),
-  operatingExpenses: z.record(z.number()),
+  operatingExpenses: z.record(z.string(), z.number()),
   netProfit: z.number(),
 });
 export type XeroProfitLoss = z.infer<typeof XeroProfitLossSchema>;

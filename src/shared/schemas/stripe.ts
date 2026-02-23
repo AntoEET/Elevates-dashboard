@@ -31,7 +31,7 @@ export const StripeSubscriptionSchema = z.object({
   currency: z.string().default('gbp'),
   items: z.array(StripeSubscriptionItemSchema),
   mrr: z.number(), // Calculated MRR for this subscription
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
   created: z.number(),
 });
 export type StripeSubscription = z.infer<typeof StripeSubscriptionSchema>;
@@ -48,7 +48,7 @@ export const StripeCustomerSchema = z.object({
   currency: z.string().nullable(),
   subscriptions: z.array(StripeSubscriptionSchema).optional(),
   lifetimeValue: z.number().optional(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
   defaultSource: z.string().nullable(),
   delinquent: z.boolean(),
 });
@@ -73,7 +73,7 @@ export const StripeInvoiceSchema = z.object({
   periodEnd: z.number(),
   hostedInvoiceUrl: z.string().nullable(),
   invoicePdf: z.string().nullable(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
 });
 export type StripeInvoice = z.infer<typeof StripeInvoiceSchema>;
 
@@ -96,7 +96,7 @@ export const StripePaymentIntentSchema = z.object({
   ]),
   customer: z.string().nullable(),
   created: z.number(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
 });
 export type StripePaymentIntent = z.infer<typeof StripePaymentIntentSchema>;
 

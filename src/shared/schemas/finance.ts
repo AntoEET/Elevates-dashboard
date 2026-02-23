@@ -118,7 +118,7 @@ export const TransactionSchema = z.object({
   category: z.string(),
   account: z.string(),
   source: z.enum(['xero', 'stripe', 'manual']),
-  metadata: z.record(z.any()).optional(),
+  metadata: z.record(z.string(), z.any()).optional(),
 });
 export type Transaction = z.infer<typeof TransactionSchema>;
 
