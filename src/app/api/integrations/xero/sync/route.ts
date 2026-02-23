@@ -31,40 +31,29 @@ export async function POST() {
       xeroService.getProfitAndLoss(fromDate, toDate),
     ]);
 
-    // Save data to cache
-    const cacheDir = path.join(process.cwd(), 'src', 'data', 'integrations', 'xero-cache');
-    await fs.mkdir(cacheDir, { recursive: true });
-
+    // Save data to cache (/tmp for serverless compatibility)
     await Promise.all([
       fs.writeFile(
-        path.join(cacheDir, 'accounts.json'),
+        path.join('/tmp', 'xero-accounts.json'),
         JSON.stringify(accounts, null, 2)
       ),
       fs.writeFile(
-        path.join(cacheDir, 'transactions.json'),
+        path.join('/tmp', 'xero-transactions.json'),
         JSON.stringify(transactions, null, 2)
       ),
       fs.writeFile(
-        path.join(cacheDir, 'balance-sheet.json'),
+        path.join('/tmp', 'xero-balance-sheet.json'),
         JSON.stringify(balanceSheet, null, 2)
       ),
       fs.writeFile(
-        path.join(cacheDir, 'profit-loss.json'),
+        path.join('/tmp', 'xero-profit-loss.json'),
         JSON.stringify(profitLoss, null, 2)
       ),
     ]);
 
     // Save sync metadata
-    const metadataDir = path.join(
-      process.cwd(),
-      'src',
-      'data',
-      'integrations',
-      'sync-metadata'
-    );
-    await fs.mkdir(metadataDir, { recursive: true });
     await fs.writeFile(
-      path.join(metadataDir, 'xero-sync.json'),
+      path.join('/tmp', 'xero-sync-metadata.json'),
       JSON.stringify(
         {
           lastSyncAt: new Date().toISOString(),
@@ -104,14 +93,7 @@ export async function POST() {
  */
 export async function GET() {
   try {
-    const metadataPath = path.join(
-      process.cwd(),
-      'src',
-      'data',
-      'integrations',
-      'sync-metadata',
-      'xero-sync.json'
-    );
+    const metadataPath = path.join('/tmp', 'xero-sync-metadata.json');
 
     try {
       const data = await fs.readFile(metadataPath, 'utf-8');
