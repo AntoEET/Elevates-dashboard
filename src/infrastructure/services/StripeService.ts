@@ -65,11 +65,12 @@ export class StripeService {
       });
 
       for (const sub of response.data) {
+        const subAny = sub as any;
         const items = sub.items.data.map((item) => ({
           id: item.id,
           priceId: item.price.id,
           quantity: item.quantity || 1,
-          amount: item.price.unit_amount || 0,
+          amount: (item.price as any).unit_amount || 0,
         }));
 
         // Calculate MRR for this subscription
@@ -79,10 +80,10 @@ export class StripeService {
           id: sub.id,
           customer: typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
           status: sub.status as any,
-          currentPeriodStart: sub.current_period_start,
-          currentPeriodEnd: sub.current_period_end,
-          cancelAtPeriodEnd: sub.cancel_at_period_end,
-          canceledAt: sub.canceled_at,
+          currentPeriodStart: subAny.current_period_start,
+          currentPeriodEnd: subAny.current_period_end,
+          cancelAtPeriodEnd: subAny.cancel_at_period_end,
+          canceledAt: subAny.canceled_at,
           currency: sub.currency,
           items,
           mrr,
@@ -111,11 +112,12 @@ export class StripeService {
         expand: ['items.data.price'],
       });
 
+      const subAny = sub as any;
       const items = sub.items.data.map((item) => ({
         id: item.id,
         priceId: item.price.id,
         quantity: item.quantity || 1,
-        amount: item.price.unit_amount || 0,
+        amount: (item.price as any).unit_amount || 0,
       }));
 
       const mrr = this.calculateSubscriptionMRR(sub);
@@ -124,10 +126,10 @@ export class StripeService {
         id: sub.id,
         customer: typeof sub.customer === 'string' ? sub.customer : sub.customer.id,
         status: sub.status as any,
-        currentPeriodStart: sub.current_period_start,
-        currentPeriodEnd: sub.current_period_end,
-        cancelAtPeriodEnd: sub.cancel_at_period_end,
-        canceledAt: sub.canceled_at,
+        currentPeriodStart: subAny.current_period_start,
+        currentPeriodEnd: subAny.current_period_end,
+        cancelAtPeriodEnd: subAny.cancel_at_period_end,
+        canceledAt: subAny.canceled_at,
         currency: sub.currency,
         items,
         mrr,
@@ -149,7 +151,7 @@ export class StripeService {
     let monthlyAmount = 0;
 
     for (const item of sub.items.data) {
-      const price = item.price;
+      const price = item.price as any;
       const quantity = item.quantity || 1;
       const unitAmount = price.unit_amount || 0;
 
@@ -200,6 +202,7 @@ export class StripeService {
       });
 
       for (const customer of response.data) {
+        const customerAny = customer as any;
         customers.push({
           id: customer.id,
           email: customer.email,
@@ -207,7 +210,7 @@ export class StripeService {
           created: customer.created,
           currency: customer.currency,
           metadata: customer.metadata,
-          defaultSource: customer.default_source as string | null,
+          defaultSource: customerAny.default_source as string | null,
           delinquent: customer.delinquent || false,
         });
       }
@@ -229,6 +232,7 @@ export class StripeService {
 
     try {
       const customer = await stripe.customers.retrieve(customerId);
+      const customerAny = customer as any;
 
       return {
         id: customer.id,
@@ -237,7 +241,7 @@ export class StripeService {
         created: customer.created,
         currency: customer.currency,
         metadata: customer.metadata,
-        defaultSource: customer.default_source as string | null,
+        defaultSource: customerAny.default_source as string | null,
         delinquent: customer.delinquent || false,
       };
     } catch (error) {
@@ -269,21 +273,22 @@ export class StripeService {
       });
 
       for (const invoice of response.data) {
+        const invoiceAny = invoice as any;
         invoices.push({
           id: invoice.id,
           customer: typeof invoice.customer === 'string' ? invoice.customer : invoice.customer?.id || '',
           subscription: typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id || null,
           status: invoice.status as any,
           created: invoice.created,
-          dueDate: invoice.due_date,
-          amountDue: invoice.amount_due,
-          amountPaid: invoice.amount_paid,
-          amountRemaining: invoice.amount_remaining,
+          dueDate: invoiceAny.due_date,
+          amountDue: invoiceAny.amount_due,
+          amountPaid: invoiceAny.amount_paid,
+          amountRemaining: invoiceAny.amount_remaining,
           currency: invoice.currency,
-          periodStart: invoice.period_start,
-          periodEnd: invoice.period_end,
-          hostedInvoiceUrl: invoice.hosted_invoice_url,
-          invoicePdf: invoice.invoice_pdf,
+          periodStart: invoiceAny.period_start,
+          periodEnd: invoiceAny.period_end,
+          hostedInvoiceUrl: invoiceAny.hosted_invoice_url,
+          invoicePdf: invoiceAny.invoice_pdf,
           metadata: invoice.metadata,
         });
       }
