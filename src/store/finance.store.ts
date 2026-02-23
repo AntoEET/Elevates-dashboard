@@ -57,7 +57,7 @@ interface FinanceState {
   /**
    * Fetch historical data for charts
    */
-  fetchHistoricalData: (months: number) => Promise<void>;
+  fetchHistoricalData: (months?: number) => Promise<void>;
 
   /**
    * Refresh all data (fetch metrics + historical)
