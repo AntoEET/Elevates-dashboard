@@ -69,7 +69,7 @@ export class StripeService {
           id: item.id,
           priceId: item.price.id,
           quantity: item.quantity || 1,
-          amount: item.price.unitAmount || 0,
+          amount: item.price.unit_amount || 0,
         }));
 
         // Calculate MRR for this subscription
@@ -115,7 +115,7 @@ export class StripeService {
         id: item.id,
         priceId: item.price.id,
         quantity: item.quantity || 1,
-        amount: item.price.unitAmount || 0,
+        amount: item.price.unit_amount || 0,
       }));
 
       const mrr = this.calculateSubscriptionMRR(sub);
@@ -151,7 +151,7 @@ export class StripeService {
     for (const item of sub.items.data) {
       const price = item.price;
       const quantity = item.quantity || 1;
-      const unitAmount = price.unitAmount || 0;
+      const unitAmount = price.unit_amount || 0;
 
       // Convert to monthly amount based on interval
       if (price.recurring) {
@@ -207,7 +207,7 @@ export class StripeService {
           created: customer.created,
           currency: customer.currency,
           metadata: customer.metadata,
-          defaultSource: customer.defaultSource as string | null,
+          defaultSource: customer.default_source as string | null,
           delinquent: customer.delinquent || false,
         });
       }
@@ -237,7 +237,7 @@ export class StripeService {
         created: customer.created,
         currency: customer.currency,
         metadata: customer.metadata,
-        defaultSource: customer.defaultSource as string | null,
+        defaultSource: customer.default_source as string | null,
         delinquent: customer.delinquent || false,
       };
     } catch (error) {
@@ -275,15 +275,15 @@ export class StripeService {
           subscription: typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id || null,
           status: invoice.status as any,
           created: invoice.created,
-          dueDate: invoice.dueDate,
-          amountDue: invoice.amountDue,
-          amountPaid: invoice.amountPaid,
-          amountRemaining: invoice.amountRemaining,
+          dueDate: invoice.due_date,
+          amountDue: invoice.amount_due,
+          amountPaid: invoice.amount_paid,
+          amountRemaining: invoice.amount_remaining,
           currency: invoice.currency,
-          periodStart: invoice.periodStart,
-          periodEnd: invoice.periodEnd,
-          hostedInvoiceUrl: invoice.hostedInvoiceUrl,
-          invoicePdf: invoice.invoicePdf,
+          periodStart: invoice.period_start,
+          periodEnd: invoice.period_end,
+          hostedInvoiceUrl: invoice.hosted_invoice_url,
+          invoicePdf: invoice.invoice_pdf,
           metadata: invoice.metadata,
         });
       }
