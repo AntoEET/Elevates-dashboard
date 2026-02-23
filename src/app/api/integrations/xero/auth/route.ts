@@ -8,7 +8,7 @@ import { xeroService } from '@/infrastructure/services/XeroService';
 export async function GET() {
   try {
     // Generate OAuth consent URL
-    const consentUrl = xeroService.buildConsentUrl();
+    const consentUrl = await xeroService.buildConsentUrl();
 
     // Redirect user to Xero authorization page
     return NextResponse.redirect(consentUrl);

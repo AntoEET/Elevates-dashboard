@@ -35,8 +35,8 @@ export class XeroService {
   /**
    * Generate OAuth authorization URL
    */
-  buildConsentUrl(): string {
-    return this.client.buildConsentUrl();
+  async buildConsentUrl(): Promise<string> {
+    return await this.client.buildConsentUrl();
   }
 
   /**
