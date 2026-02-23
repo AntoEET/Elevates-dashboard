@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# google calendar integration data (contains sensitive OAuth tokens and sync data)
+/src/data/oauth-tokens/
+/src/data/calendar-sync/
+
+# finance integration data (contains OAuth tokens and cached financial data)
+/src/data/integrations/xero-tokens/
+/src/data/integrations/stripe-tokens/
+/src/data/integrations/xero-cache/
+/src/data/integrations/sync-metadata/
+/src/data/finance/

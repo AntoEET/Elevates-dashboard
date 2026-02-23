@@ -1,0 +1,28 @@
+{
+  "meetings": [
+    {
+      "id": "meeting-101",
+      "clientId": "techstart-io",
+      "title": "Performance Review Call",
+      "description": "Discuss recent performance concerns and create improvement roadmap",
+      "type": "video",
+      "date": "2024-12-05T11:00:00Z",
+      "duration": 45,
+      "attendees": ["Alex Rivera", "Emily Chen", "Technical Support"],
+      "createdAt": "2024-11-26T10:00:00Z"
+    },
+    {
+      "id": "meeting-102",
+      "clientId": "techstart-io",
+      "title": "Monthly Check-in",
+      "description": "Regular monthly status update and roadmap review",
+      "type": "call",
+      "date": "2024-11-15T15:00:00Z",
+      "duration": 30,
+      "attendees": ["Alex Rivera", "Emily Chen"],
+      "notes": "Client raised concerns about response time in peak hours. Promised to investigate.",
+      "outcome": "Investigation ticket created for performance team",
+      "createdAt": "2024-11-01T09:00:00Z"
+    }
+  ]
+}

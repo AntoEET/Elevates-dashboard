@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "task-201",
+      "clientId": "global-foods",
+      "title": "Supply Chain AI Integration",
+      "description": "Support integration of AI agents with their supply chain management system",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2024-12-20",
+      "assignee": "Technical Team",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-28T11:00:00Z"
+    },
+    {
+      "id": "task-202",
+      "clientId": "global-foods",
+      "title": "Training Session - APAC Team",
+      "description": "Conduct training session for APAC regional team on AI platform usage",
+      "status": "pending",
+      "priority": "medium",
+      "dueDate": "2024-12-15",
+      "assignee": "Emily Chen",
+      "createdAt": "2024-11-15T10:00:00Z",
+      "updatedAt": "2024-11-15T10:00:00Z"
+    }
+  ]
+}

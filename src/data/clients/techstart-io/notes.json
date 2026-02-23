@@ -1,0 +1,22 @@
+{
+  "notes": [
+    {
+      "id": "note-101",
+      "clientId": "techstart-io",
+      "title": "Performance Issue - Critical",
+      "content": "Client experiencing latency issues during peak hours (9-11 AM PST). This is affecting their customer service response times. Technical team investigating - appears to be related to token throttling. Need to resolve before renewal discussion in Q1.",
+      "category": "issue",
+      "createdAt": "2024-11-25T10:30:00Z",
+      "updatedAt": "2024-11-26T09:00:00Z"
+    },
+    {
+      "id": "note-102",
+      "clientId": "techstart-io",
+      "title": "Renewal Risk Assessment",
+      "content": "Risk factors for renewal:\n1. Recent performance issues (being addressed)\n2. CEO mentioned budget constraints\n3. Competitor evaluation in progress\n\nMitigation:\n- Resolve performance issues by Dec 10\n- Prepare strong ROI documentation\n- Consider pricing flexibility",
+      "category": "issue",
+      "createdAt": "2024-11-26T14:30:00Z",
+      "updatedAt": "2024-11-26T14:30:00Z"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "meetings": [
+    {
+      "id": "meeting-201",
+      "clientId": "global-foods",
+      "title": "Supply Chain Integration Sync",
+      "description": "Weekly sync on supply chain AI integration progress",
+      "type": "video",
+      "date": "2024-12-02T09:00:00Z",
+      "duration": 30,
+      "attendees": ["Marcus Chen", "Technical Team", "Integration Specialist"],
+      "createdAt": "2024-11-25T10:00:00Z"
+    },
+    {
+      "id": "meeting-202",
+      "clientId": "global-foods",
+      "title": "Executive Steering Committee",
+      "description": "Monthly executive review of AI transformation program",
+      "type": "in-person",
+      "date": "2024-11-20T14:00:00Z",
+      "duration": 90,
+      "attendees": ["Marcus Chen", "CEO", "CTO", "John Smith", "Account Director"],
+      "notes": "Strong executive support for AI program. CEO mentioned as keynote example at industry conference.",
+      "outcome": "Approved budget for phase 2 expansion",
+      "createdAt": "2024-11-01T09:00:00Z"
+    }
+  ]
+}

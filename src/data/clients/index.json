@@ -1,0 +1,23 @@
+{
+  "clients": [
+    {
+      "id": "acme-corp",
+      "name": "Acme Corporation",
+      "tier": "enterprise",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "techstart-io",
+      "name": "TechStart.io",
+      "tier": "growth",
+      "createdAt": "2024-03-20T14:30:00Z"
+    },
+    {
+      "id": "global-foods",
+      "name": "Global Foods Ltd",
+      "tier": "enterprise",
+      "createdAt": "2024-02-01T09:00:00Z"
+    }
+  ],
+  "lastUpdated": "2024-12-01T12:00:00Z"
+}

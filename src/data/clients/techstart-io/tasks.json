@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    {
+      "id": "task-101",
+      "clientId": "techstart-io",
+      "title": "Address Performance Concerns",
+      "description": "Schedule call to discuss recent performance issues and create action plan",
+      "status": "in-progress",
+      "priority": "urgent",
+      "dueDate": "2024-12-05",
+      "assignee": "Emily Chen",
+      "createdAt": "2024-11-25T10:00:00Z",
+      "updatedAt": "2024-11-26T09:00:00Z"
+    },
+    {
+      "id": "task-102",
+      "clientId": "techstart-io",
+      "title": "ROI Documentation",
+      "description": "Prepare detailed ROI analysis to demonstrate value and address renewal concerns",
+      "status": "pending",
+      "priority": "high",
+      "dueDate": "2024-12-10",
+      "assignee": "John Smith",
+      "createdAt": "2024-11-26T14:00:00Z",
+      "updatedAt": "2024-11-26T14:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Import from Outreach - Elevates Dashboard</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1E3A8A;
+            margin-top: 0;
+        }
+        .info {
+            background: #EFF6FF;
+            border-left: 4px solid #1E3A8A;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .success {
+            color: #059669;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            background: #D1FAE5;
+            border-radius: 6px;
+        }
+        .error {
+            color: #DC2626;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            background: #FEE2E2;
+            border-radius: 6px;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1E3A8A;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: #F9FAFB;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #1E3A8A;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6B7280;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Import Prospects from Outreach System</h1>
+
+        <div class="info">
+            <strong>Quick Import:</strong><br>
+            This will fetch all prospects from the Outreach System API and import them directly into your Elevates Dashboard.
+        </div>
+
+        <button onclick="importProspects()" id="import-btn">Import Now</button>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Importing prospects...</p>
+        </div>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function importProspects() {
+            const btn = document.getElementById('import-btn');
+            const loading = document.getElementById('loading');
+            const result = document.getElementById('result');
+
+            btn.disabled = true;
+            loading.style.display = 'block';
+            result.innerHTML = '';
+
+            try {
+                // Fetch prospects from the sync API
+                const response = await fetch('http://localhost:3001/api/prospects/sync', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        prospects: await fetchOutreachProspects()
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to fetch prospects from API');
+                }
+
+                const data = await response.json();
+
+                if (!data.success || !data.prospects) {
+                    throw new Error('Invalid response from API');
+                }
+
+                // Get existing prospects from localStorage
+                const existingData = localStorage.getItem('elevates-prospects');
+                let existingProspects = [];
+
+                if (existingData) {
+                    try {
+                        const parsed = JSON.parse(existingData);
+                        existingProspects = parsed?.state?.prospects || [];
+                    } catch (e) {
+                        console.warn('Could not parse existing prospects:', e);
+                    }
+                }
+
+                // Merge - avoid duplicates by email
+                const existingEmails = new Set(existingProspects.map(p => p.email?.toLowerCase()).filter(Boolean));
+                const newProspects = data.prospects.filter(p => {
+                    if (!p.email) return true; // Include if no email
+                    return !existingEmails.has(p.email.toLowerCase());
+                });
+
+                const allProspects = [...existingProspects, ...newProspects];
+
+                // Create the Zustand store format
+                const storeData = {
+                    state: {
+                        prospects: allProspects,
+                        selectedProspectId: null,
+                        viewMode: 'pipeline',
+                        searchQuery: '',
+                        filterStage: 'all',
+                        filterPriority: 'all'
+                    },
+                    version: 0
+                };
+
+                // Save to localStorage
+                localStorage.setItem('elevates-prospects', JSON.stringify(storeData));
+
+                // Show success with stats
+                const byStage = {};
+                allProspects.forEach(p => {
+                    byStage[p.stage] = (byStage[p.stage] || 0) + 1;
+                });
+
+                result.innerHTML = `
+                    <div class="success">
+                        <h3>✅ Import Successful!</h3>
+                        <p>Imported ${newProspects.length} new prospects</p>
+                        <p>Total prospects: ${allProspects.length}</p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-number">${allProspects.length}</div>
+                            <div class="stat-label">Total</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${newProspects.length}</div>
+                            <div class="stat-label">New</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">${existingProspects.length}</div>
+                            <div class="stat-label">Existing</div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px;">
+                        <strong>Next step:</strong>
+                        <a href="http://localhost:3001/crm" style="color: #1E3A8A; text-decoration: none; font-weight: bold;">
+                            Open Elevates Dashboard →
+                        </a>
+                    </p>
+                `;
+
+            } catch (error) {
+                result.innerHTML = `
+                    <div class="error">
+                        <strong>Import Failed</strong><br>
+                        ${error.message}
+                    </div>
+                `;
+            } finally {
+                loading.style.display = 'none';
+                btn.disabled = false;
+            }
+        }
+
+        async function fetchOutreachProspects() {
+            // Fetch from outreach system API
+            const response = await fetch('http://localhost:5000/api/prospects');
+
+            if (!response.ok) {
+                throw new Error('Could not connect to Outreach System (localhost:5000)');
+            }
+
+            const prospects = await response.json();
+
+            if (!Array.isArray(prospects)) {
+                throw new Error('Invalid data from Outreach System');
+            }
+
+            return prospects;
+        }
+    </script>
+</body>
+</html>

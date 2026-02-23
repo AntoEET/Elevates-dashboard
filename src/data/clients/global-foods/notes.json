@@ -1,0 +1,22 @@
+{
+  "notes": [
+    {
+      "id": "note-201",
+      "clientId": "global-foods",
+      "title": "Case Study Opportunity",
+      "content": "Client has agreed to participate in a joint case study showcasing their AI transformation journey. Marketing to coordinate with Marcus Chen's team for testimonial and metrics.",
+      "category": "opportunity",
+      "createdAt": "2024-11-20T15:00:00Z",
+      "updatedAt": "2024-11-20T15:00:00Z"
+    },
+    {
+      "id": "note-202",
+      "clientId": "global-foods",
+      "title": "APAC Expansion Plans",
+      "content": "Client planning to expand AI usage to APAC operations (Singapore, Australia, Japan) in H1 2025. Estimated additional contract value: $600K-800K.",
+      "category": "opportunity",
+      "createdAt": "2024-11-15T11:00:00Z",
+      "updatedAt": "2024-11-15T11:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "documents": [
+    {
+      "id": "doc-201",
+      "clientId": "global-foods",
+      "name": "Enterprise Agreement 2024-2026",
+      "type": "contract",
+      "path": "/documents/global-foods/enterprise-agreement-2024-2026.pdf",
+      "uploadedAt": "2024-02-01T10:00:00Z",
+      "size": 3456789
+    },
+    {
+      "id": "doc-202",
+      "clientId": "global-foods",
+      "name": "Supply Chain Integration Architecture",
+      "type": "other",
+      "path": "/documents/global-foods/supply-chain-architecture.pdf",
+      "uploadedAt": "2024-11-01T14:00:00Z",
+      "size": 4567890
+    },
+    {
+      "id": "doc-203",
+      "clientId": "global-foods",
+      "name": "Phase 2 Expansion Proposal",
+      "type": "proposal",
+      "path": "/documents/global-foods/phase2-expansion.pdf",
+      "uploadedAt": "2024-11-15T09:00:00Z",
+      "size": 2345678
+    }
+  ]
+}

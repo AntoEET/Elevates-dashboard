@@ -1,0 +1,30 @@
+{
+  "id": "global-foods",
+  "name": "Global Foods Ltd",
+  "logo": "/logos/global-foods.png",
+  "industry": "Food & Beverage",
+  "tier": "enterprise",
+  "contact": {
+    "name": "Marcus Chen",
+    "email": "marcus.chen@globalfoods.com",
+    "phone": "+1 (555) 456-7890",
+    "role": "Chief Digital Officer"
+  },
+  "contract": {
+    "value": 1800000,
+    "startDate": "2024-02-01",
+    "endDate": "2026-01-31",
+    "status": "active"
+  },
+  "financials": {
+    "arr": 1800000,
+    "nrr": 112,
+    "revenueGenerated": 2760000,
+    "totalInvestment": 800000,
+    "healthScore": 88
+  },
+  "contractHealth": "healthy",
+  "tags": ["enterprise", "food-beverage", "global"],
+  "createdAt": "2024-02-01T09:00:00Z",
+  "updatedAt": "2024-11-20T14:00:00Z"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "acme-corp",
+  "name": "Acme Corporation",
+  "logo": "/logos/acme.png",
+  "industry": "Manufacturing",
+  "tier": "enterprise",
+  "contact": {
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@acme.com",
+    "phone": "+1 (555) 123-4567",
+    "role": "VP of Operations"
+  },
+  "contract": {
+    "value": 2500000,
+    "startDate": "2024-01-15",
+    "endDate": "2027-01-14",
+    "status": "active"
+  },
+  "financials": {
+    "arr": 2500000,
+    "nrr": 115,
+    "revenueGenerated": 3850000,
+    "totalInvestment": 1000000,
+    "healthScore": 92
+  },
+  "contractHealth": "expanding",
+  "tags": ["key-account", "manufacturing", "ai-champion"],
+  "createdAt": "2024-01-15T10:00:00Z",
+  "updatedAt": "2024-11-28T16:45:00Z"
+}

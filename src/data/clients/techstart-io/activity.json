@@ -1,0 +1,44 @@
+{
+  "activities": [
+    {
+      "id": "activity-101",
+      "clientId": "techstart-io",
+      "type": "note-created",
+      "description": "Note 'Renewal Risk Assessment' created",
+      "metadata": { "noteId": "note-102", "category": "issue" },
+      "timestamp": "2024-11-26T14:30:00Z"
+    },
+    {
+      "id": "activity-102",
+      "clientId": "techstart-io",
+      "type": "task-created",
+      "description": "Task 'ROI Documentation' created",
+      "metadata": { "taskId": "task-102", "priority": "high" },
+      "timestamp": "2024-11-26T14:00:00Z"
+    },
+    {
+      "id": "activity-103",
+      "clientId": "techstart-io",
+      "type": "health-score-changed",
+      "description": "Health score decreased from 85 to 78",
+      "metadata": { "previousScore": 85, "newScore": 78, "reason": "Performance issues reported" },
+      "timestamp": "2024-11-25T11:00:00Z"
+    },
+    {
+      "id": "activity-104",
+      "clientId": "techstart-io",
+      "type": "note-created",
+      "description": "Note 'Performance Issue - Critical' created",
+      "metadata": { "noteId": "note-101", "category": "issue" },
+      "timestamp": "2024-11-25T10:30:00Z"
+    },
+    {
+      "id": "activity-105",
+      "clientId": "techstart-io",
+      "type": "task-created",
+      "description": "Task 'Address Performance Concerns' created",
+      "metadata": { "taskId": "task-101", "priority": "urgent" },
+      "timestamp": "2024-11-25T10:00:00Z"
+    }
+  ]
+}

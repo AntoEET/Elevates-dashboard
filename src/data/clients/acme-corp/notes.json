@@ -1,0 +1,31 @@
+{
+  "notes": [
+    {
+      "id": "note-001",
+      "clientId": "acme-corp",
+      "title": "Expansion Opportunity",
+      "content": "Sarah mentioned they are planning to expand AI usage to their European operations in Q2 2025. This could represent a significant upsell opportunity. Key decision makers in EU: Hans Mueller (EU Operations Director) and Lisa Schmidt (EU IT Lead).",
+      "category": "opportunity",
+      "createdAt": "2024-11-28T11:30:00Z",
+      "updatedAt": "2024-11-28T11:30:00Z"
+    },
+    {
+      "id": "note-002",
+      "clientId": "acme-corp",
+      "title": "Technical Integration Feedback",
+      "content": "Client feedback from tech team: Very satisfied with API reliability. Requested better documentation for custom webhook configurations. Emily to coordinate with docs team.",
+      "category": "feedback",
+      "createdAt": "2024-11-25T14:00:00Z",
+      "updatedAt": "2024-11-25T14:00:00Z"
+    },
+    {
+      "id": "note-003",
+      "clientId": "acme-corp",
+      "title": "Account Strategy Notes",
+      "content": "Key account strategy for 2025:\n1. Support EU expansion initiative\n2. Introduce sales assist agents (Q1 pilot)\n3. Achieve 40% contract value increase at renewal\n4. Maintain 95%+ satisfaction score",
+      "category": "general",
+      "createdAt": "2024-11-01T09:00:00Z",
+      "updatedAt": "2024-11-28T16:00:00Z"
+    }
+  ]
+}

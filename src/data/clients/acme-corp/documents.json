@@ -1,0 +1,40 @@
+{
+  "documents": [
+    {
+      "id": "doc-001",
+      "clientId": "acme-corp",
+      "name": "Master Services Agreement 2024-2027",
+      "type": "contract",
+      "path": "/documents/acme-corp/msa-2024-2027.pdf",
+      "uploadedAt": "2024-01-15T10:30:00Z",
+      "size": 2458624
+    },
+    {
+      "id": "doc-002",
+      "clientId": "acme-corp",
+      "name": "Q3 2024 ROI Report",
+      "type": "report",
+      "path": "/documents/acme-corp/q3-2024-roi-report.pdf",
+      "uploadedAt": "2024-10-15T09:00:00Z",
+      "size": 1245678
+    },
+    {
+      "id": "doc-003",
+      "clientId": "acme-corp",
+      "name": "2025 Expansion Proposal",
+      "type": "proposal",
+      "path": "/documents/acme-corp/2025-expansion-proposal.pdf",
+      "uploadedAt": "2024-11-20T14:00:00Z",
+      "size": 3567890
+    },
+    {
+      "id": "doc-004",
+      "clientId": "acme-corp",
+      "name": "QBR Presentation Template",
+      "type": "presentation",
+      "path": "/documents/acme-corp/qbr-template.pptx",
+      "uploadedAt": "2024-11-25T11:00:00Z",
+      "size": 5678901
+    }
+  ]
+}

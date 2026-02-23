@@ -1,0 +1,52 @@
+{
+  "activities": [
+    {
+      "id": "activity-201",
+      "clientId": "global-foods",
+      "type": "meeting-completed",
+      "description": "Meeting 'Executive Steering Committee' completed",
+      "metadata": { "meetingId": "meeting-202", "outcome": "Approved budget for phase 2" },
+      "timestamp": "2024-11-20T15:30:00Z"
+    },
+    {
+      "id": "activity-202",
+      "clientId": "global-foods",
+      "type": "note-created",
+      "description": "Note 'Case Study Opportunity' created",
+      "metadata": { "noteId": "note-201", "category": "opportunity" },
+      "timestamp": "2024-11-20T15:00:00Z"
+    },
+    {
+      "id": "activity-203",
+      "clientId": "global-foods",
+      "type": "document-uploaded",
+      "description": "Document 'Phase 2 Expansion Proposal' uploaded",
+      "metadata": { "documentId": "doc-203", "size": 2345678 },
+      "timestamp": "2024-11-15T09:00:00Z"
+    },
+    {
+      "id": "activity-204",
+      "clientId": "global-foods",
+      "type": "note-created",
+      "description": "Note 'APAC Expansion Plans' created",
+      "metadata": { "noteId": "note-202", "category": "opportunity" },
+      "timestamp": "2024-11-15T11:00:00Z"
+    },
+    {
+      "id": "activity-205",
+      "clientId": "global-foods",
+      "type": "task-created",
+      "description": "Task 'Training Session - APAC Team' created",
+      "metadata": { "taskId": "task-202", "priority": "medium" },
+      "timestamp": "2024-11-15T10:00:00Z"
+    },
+    {
+      "id": "activity-206",
+      "clientId": "global-foods",
+      "type": "task-created",
+      "description": "Task 'Supply Chain AI Integration' created",
+      "metadata": { "taskId": "task-201", "priority": "high" },
+      "timestamp": "2024-11-01T09:00:00Z"
+    }
+  ]
+}

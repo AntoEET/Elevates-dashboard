@@ -1,0 +1,22 @@
+{
+  "documents": [
+    {
+      "id": "doc-101",
+      "clientId": "techstart-io",
+      "name": "Service Agreement 2024",
+      "type": "contract",
+      "path": "/documents/techstart-io/service-agreement-2024.pdf",
+      "uploadedAt": "2024-03-20T15:00:00Z",
+      "size": 1234567
+    },
+    {
+      "id": "doc-102",
+      "clientId": "techstart-io",
+      "name": "Implementation Guide",
+      "type": "other",
+      "path": "/documents/techstart-io/implementation-guide.pdf",
+      "uploadedAt": "2024-03-25T10:00:00Z",
+      "size": 2345678
+    }
+  ]
+}

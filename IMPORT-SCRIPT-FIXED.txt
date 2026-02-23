@@ -1,0 +1,87 @@
+IMPORT PROSPECTS - FIXED VERSION
+==============================================
+
+Copy and paste this into the browser console:
+
+```javascript
+(async () => {
+    try {
+        console.log('🔄 Importing prospects from Outreach System...');
+
+        // Fetch via proxy API (avoids CSP issues)
+        const response = await fetch('/api/import-outreach');
+        const data = await response.json();
+
+        if (!data.success) {
+            throw new Error(data.error || 'Import failed');
+        }
+
+        console.log(`✅ Fetched ${data.count} prospects from Outreach System`);
+
+        const elevatesProspects = data.prospects;
+
+        // Get existing prospects
+        const existing = localStorage.getItem('elevates-prospects');
+        let existingProspects = [];
+
+        if (existing) {
+            try {
+                const parsed = JSON.parse(existing);
+                existingProspects = parsed?.state?.prospects || [];
+                console.log(`📋 Found ${existingProspects.length} existing prospects`);
+            } catch (e) {
+                console.warn('⚠️ Could not parse existing data');
+            }
+        }
+
+        // Merge - avoid duplicates by ID
+        const existingIds = new Set(existingProspects.map(p => p.id));
+        const newProspects = elevatesProspects.filter(p => !existingIds.has(p.id));
+
+        const allProspects = [...existingProspects, ...newProspects];
+
+        console.log(`➕ Adding ${newProspects.length} new prospects`);
+        console.log(`📊 Total prospects: ${allProspects.length}`);
+
+        // Save to localStorage
+        const storeData = {
+            state: {
+                prospects: allProspects,
+                selectedProspectId: null,
+                viewMode: 'pipeline',
+                searchQuery: '',
+                filterStage: 'all',
+                filterPriority: 'all'
+            },
+            version: 0
+        };
+
+        localStorage.setItem('elevates-prospects', JSON.stringify(storeData));
+
+        console.log('✅ Import complete!');
+        console.log(`📊 Final Stats:`);
+        console.log(`   - Total: ${allProspects.length}`);
+        console.log(`   - New: ${newProspects.length}`);
+        console.log(`   - Existing: ${existingProspects.length}`);
+        console.log('');
+        console.log('🔄 Refreshing page in 1 second...');
+
+        // Reload page to see prospects
+        setTimeout(() => location.reload(), 1000);
+
+    } catch (error) {
+        console.error('❌ Import failed:', error);
+    }
+})();
+```
+
+==============================================
+INSTRUCTIONS:
+1. Go to: http://localhost:3001/crm
+2. Press F12 to open console
+3. Copy the code above (from (async to the end)
+4. Paste into console and press Enter
+5. Wait for page to reload
+
+Your prospects will appear!
+==============================================

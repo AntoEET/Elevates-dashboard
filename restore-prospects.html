@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restore Prospects - Elevates Dashboard</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1E3A8A;
+            margin-top: 0;
+        }
+        .info {
+            background: #EFF6FF;
+            border-left: 4px solid #1E3A8A;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        .success {
+            color: #059669;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .error {
+            color: #DC2626;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        #file-input {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Restore Prospects from Outreach CSV</h1>
+
+        <div class="info">
+            <strong>Instructions:</strong><br>
+            1. This will convert your outreach_tracker.csv data back to Elevates format<br>
+            2. Upload the CSV file below<br>
+            3. Click "Restore to Elevates"<br>
+            4. Refresh your Elevates Dashboard
+        </div>
+
+        <input type="file" id="file-input" accept=".csv" />
+        <button onclick="restoreFromFile()">Restore from File</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function csvToProspects(csvText) {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',');
+
+            const prospects = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                const row = {};
+
+                headers.forEach((header, index) => {
+                    row[header.trim()] = values[index] ? values[index].trim() : '';
+                });
+
+                // Convert outreach format to Elevates format
+                const prospect = {
+                    id: row.prospect_id || crypto.randomUUID(),
+                    name: `${row.first_name || ''} ${row.last_name || ''}`.trim(),
+                    company: row.company || '',
+                    email: row.email || '',
+                    phone: '',
+                    linkedinProfile: row.linkedin_url || '',
+                    twitterProfile: '',
+                    instagramProfile: '',
+                    otherProfile: '',
+
+                    // Pipeline tracking - map from outreach status
+                    stage: mapStatusToStage(row.status),
+                    dateAdded: row.date_added || new Date().toISOString(),
+                    dateInvited: row.email_1_sent || undefined,
+                    dateConnected: row.reply_date || undefined,
+                    dateFirstMessage: row.email_1_sent || undefined,
+                    dateMeetingScheduled: row.meeting_date || undefined,
+                    dateProposalSent: undefined,
+                    dateClosed: undefined,
+
+                    accepted: row.replied === '1',
+                    firstEmailDate: row.email_1_sent || undefined,
+
+                    followUps: [],
+                    notes: row.notes || '',
+                    tags: [],
+                    priority: row.priority || 'medium',
+                    source: row.source || 'Outreach System',
+
+                    createdAt: row.date_added || new Date().toISOString(),
+                    updatedAt: row.last_updated || new Date().toISOString()
+                };
+
+                prospects.push(prospect);
+            }
+
+            return prospects;
+        }
+
+        function mapStatusToStage(status) {
+            const statusMap = {
+                'New': 'new-lead',
+                'Contacted': 'invited',
+                'Replied': 'connected',
+                'Meeting': 'meeting-scheduled',
+                'Qualified': 'proposal-sent',
+                'Won': 'closed-won',
+                'Lost': 'closed-lost',
+                'Nurture': 'follow-up'
+            };
+
+            return statusMap[status] || 'new-lead';
+        }
+
+        function restoreFromFile() {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                document.getElementById('result').innerHTML = '<p class="error">Please select a CSV file first.</p>';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const csvText = e.target.result;
+                    const prospects = csvToProspects(csvText);
+
+                    // Create the Zustand store format
+                    const storeData = {
+                        state: {
+                            prospects: prospects,
+                            selectedProspectId: null,
+                            viewMode: 'pipeline',
+                            searchQuery: '',
+                            filterStage: 'all',
+                            filterPriority: 'all'
+                        },
+                        version: 0
+                    };
+
+                    // Save to localStorage
+                    localStorage.setItem('elevates-prospects', JSON.stringify(storeData));
+
+                    document.getElementById('result').innerHTML =
+                        `<p class="success">✅ Successfully restored ${prospects.length} prospects!<br><br>` +
+                        `<a href="http://localhost:3001/crm" target="_blank">Open Elevates Dashboard CRM →</a></p>`;
+
+                } catch (error) {
+                    document.getElementById('result').innerHTML =
+                        '<p class="error">Error: ' + error.message + '</p>';
+                }
+            };
+
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>

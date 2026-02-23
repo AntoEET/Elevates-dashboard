@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear LocalStorage - Elevates Dashboard</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #1E3A8A;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px 10px 0;
+        }
+        button:hover {
+            background: #1e40af;
+        }
+        .success {
+            color: #059669;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .error {
+            color: #DC2626;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Clear Corrupted LocalStorage</h1>
+        <p>This will clear the corrupted prospect data from your browser's localStorage.</p>
+
+        <button onclick="clearProspects()">Clear Prospects Only</button>
+        <button onclick="clearAll()">Clear All Data</button>
+        <button onclick="showData()">Show Current Data</button>
+
+        <div id="result"></div>
+        <div id="data"></div>
+    </div>
+
+    <script>
+        function clearProspects() {
+            try {
+                localStorage.removeItem('elevates-prospects');
+                document.getElementById('result').innerHTML = '<p class="success">✓ Prospect data cleared successfully! You can close this page and refresh your dashboard.</p>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<p class="error">Error: ' + error.message + '</p>';
+            }
+        }
+
+        function clearAll() {
+            try {
+                localStorage.clear();
+                document.getElementById('result').innerHTML = '<p class="success">✓ All localStorage cleared successfully! You can close this page and refresh your dashboard.</p>';
+            } catch (error) {
+                document.getElementById('result').innerHTML = '<p class="error">Error: ' + error.message + '</p>';
+            }
+        }
+
+        function showData() {
+            try {
+                const data = localStorage.getItem('elevates-prospects');
+                if (data) {
+                    document.getElementById('data').innerHTML = '<h3>Current Data:</h3><pre>' + data + '</pre>';
+                } else {
+                    document.getElementById('data').innerHTML = '<p>No prospect data found in localStorage.</p>';
+                }
+            } catch (error) {
+                document.getElementById('data').innerHTML = '<p class="error">Error reading data: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

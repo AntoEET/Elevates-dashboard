@@ -1,0 +1,41 @@
+{
+  "tasks": [
+    {
+      "id": "task-001",
+      "clientId": "acme-corp",
+      "title": "Quarterly Business Review Preparation",
+      "description": "Prepare materials for Q4 QBR including ROI analysis and expansion opportunities",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2024-12-15",
+      "assignee": "John Smith",
+      "createdAt": "2024-11-20T09:00:00Z",
+      "updatedAt": "2024-11-28T14:30:00Z"
+    },
+    {
+      "id": "task-002",
+      "clientId": "acme-corp",
+      "title": "AI Agent Performance Audit",
+      "description": "Review AI agent performance metrics and identify optimization opportunities",
+      "status": "pending",
+      "priority": "medium",
+      "dueDate": "2024-12-20",
+      "assignee": "Emily Chen",
+      "createdAt": "2024-11-25T11:00:00Z",
+      "updatedAt": "2024-11-25T11:00:00Z"
+    },
+    {
+      "id": "task-003",
+      "clientId": "acme-corp",
+      "title": "Contract Renewal Discussion",
+      "description": "Schedule meeting to discuss 2027 contract renewal terms and expansion",
+      "status": "completed",
+      "priority": "high",
+      "dueDate": "2024-11-30",
+      "assignee": "John Smith",
+      "completedAt": "2024-11-29T16:00:00Z",
+      "createdAt": "2024-11-01T10:00:00Z",
+      "updatedAt": "2024-11-29T16:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "techstart-io",
+  "name": "TechStart.io",
+  "logo": "/logos/techstart.png",
+  "industry": "Technology",
+  "tier": "growth",
+  "contact": {
+    "name": "Alex Rivera",
+    "email": "alex@techstart.io",
+    "phone": "+1 (555) 987-6543",
+    "role": "CEO & Founder"
+  },
+  "contract": {
+    "value": 450000,
+    "startDate": "2024-03-20",
+    "endDate": "2025-03-19",
+    "status": "active"
+  },
+  "financials": {
+    "arr": 450000,
+    "nrr": 108,
+    "revenueGenerated": 590000,
+    "totalInvestment": 200000,
+    "healthScore": 78
+  },
+  "contractHealth": "at-risk",
+  "tags": ["startup", "technology", "high-growth"],
+  "createdAt": "2024-03-20T14:30:00Z",
+  "updatedAt": "2024-11-25T10:00:00Z"
+}

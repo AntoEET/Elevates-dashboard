@@ -1,0 +1,68 @@
+{
+  "activities": [
+    {
+      "id": "activity-001",
+      "clientId": "acme-corp",
+      "type": "task-completed",
+      "description": "Task 'Contract Renewal Discussion' marked as completed",
+      "metadata": { "taskId": "task-003", "completedBy": "John Smith" },
+      "timestamp": "2024-11-29T16:00:00Z"
+    },
+    {
+      "id": "activity-002",
+      "clientId": "acme-corp",
+      "type": "meeting-completed",
+      "description": "Meeting 'Contract Renewal Kickoff' completed",
+      "metadata": { "meetingId": "meeting-003", "outcome": "Follow-up meeting scheduled" },
+      "timestamp": "2024-11-29T15:30:00Z"
+    },
+    {
+      "id": "activity-003",
+      "clientId": "acme-corp",
+      "type": "note-created",
+      "description": "Note 'Expansion Opportunity' created",
+      "metadata": { "noteId": "note-001", "category": "opportunity" },
+      "timestamp": "2024-11-28T11:30:00Z"
+    },
+    {
+      "id": "activity-004",
+      "clientId": "acme-corp",
+      "type": "meeting-completed",
+      "description": "Meeting 'AI Implementation Review' completed",
+      "metadata": { "meetingId": "meeting-002", "outcome": "Agreed to pilot sales assist agent" },
+      "timestamp": "2024-11-28T10:45:00Z"
+    },
+    {
+      "id": "activity-005",
+      "clientId": "acme-corp",
+      "type": "document-uploaded",
+      "description": "Document 'QBR Presentation Template' uploaded",
+      "metadata": { "documentId": "doc-004", "size": 5678901 },
+      "timestamp": "2024-11-25T11:00:00Z"
+    },
+    {
+      "id": "activity-006",
+      "clientId": "acme-corp",
+      "type": "task-created",
+      "description": "Task 'AI Agent Performance Audit' created",
+      "metadata": { "taskId": "task-002", "priority": "medium" },
+      "timestamp": "2024-11-25T11:00:00Z"
+    },
+    {
+      "id": "activity-007",
+      "clientId": "acme-corp",
+      "type": "health-score-changed",
+      "description": "Health score increased from 88 to 92",
+      "metadata": { "previousScore": 88, "newScore": 92, "reason": "Strong engagement metrics" },
+      "timestamp": "2024-11-20T10:00:00Z"
+    },
+    {
+      "id": "activity-008",
+      "clientId": "acme-corp",
+      "type": "task-created",
+      "description": "Task 'Quarterly Business Review Preparation' created",
+      "metadata": { "taskId": "task-001", "priority": "high" },
+      "timestamp": "2024-11-20T09:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "meetings": [
+    {
+      "id": "meeting-001",
+      "clientId": "acme-corp",
+      "title": "Q4 Quarterly Business Review",
+      "description": "Review Q4 performance metrics, ROI analysis, and discuss 2025 roadmap",
+      "type": "video",
+      "date": "2024-12-15T14:00:00Z",
+      "duration": 60,
+      "attendees": ["Sarah Johnson", "John Smith", "Emily Chen", "Michael Brown"],
+      "createdAt": "2024-11-20T09:30:00Z"
+    },
+    {
+      "id": "meeting-002",
+      "clientId": "acme-corp",
+      "title": "AI Implementation Review",
+      "description": "Technical deep-dive on AI agent performance and optimization strategies",
+      "type": "video",
+      "date": "2024-11-28T10:00:00Z",
+      "duration": 45,
+      "attendees": ["Sarah Johnson", "Emily Chen", "Tech Team"],
+      "notes": "Discussed optimization opportunities in customer service workflows. Client interested in expanding to sales assist agents.",
+      "outcome": "Agreed to pilot sales assist agent in Q1 2025",
+      "createdAt": "2024-11-15T11:00:00Z"
+    },
+    {
+      "id": "meeting-003",
+      "clientId": "acme-corp",
+      "title": "Contract Renewal Kickoff",
+      "description": "Initial discussion about contract renewal terms for 2027",
+      "type": "call",
+      "date": "2024-11-29T15:00:00Z",
+      "duration": 30,
+      "attendees": ["Sarah Johnson", "John Smith", "Legal Team"],
+      "notes": "Client expressed strong interest in expanding scope. Discussed potential 40% increase in contract value.",
+      "outcome": "Follow-up meeting scheduled for detailed proposal review",
+      "createdAt": "2024-11-20T10:00:00Z"
+    }
+  ]
+}
