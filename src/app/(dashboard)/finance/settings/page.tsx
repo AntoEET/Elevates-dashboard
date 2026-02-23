@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +13,7 @@ interface IntegrationStatus {
   status: 'active' | 'error' | 'disconnected';
 }
 
-export default function FinanceSettingsPage() {
+function FinanceSettingsContent() {
   const searchParams = useSearchParams();
   const [xeroStatus, setXeroStatus] = useState<IntegrationStatus | null>(null);
   const [stripeStatus, setStripeStatus] = useState<IntegrationStatus | null>(null);
@@ -307,5 +307,19 @@ export default function FinanceSettingsPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function FinanceSettingsPage() {
+  return (
+    <Suspense fallback={
+      <div className="container mx-auto p-6 max-w-4xl">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <RefreshCw className="w-8 h-8 animate-spin text-muted-foreground" />
+        </div>
+      </div>
+    }>
+      <FinanceSettingsContent />
+    </Suspense>
   );
 }
