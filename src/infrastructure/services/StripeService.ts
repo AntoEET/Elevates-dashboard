@@ -205,12 +205,12 @@ export class StripeService {
         const customerAny = customer as any;
         customers.push({
           id: customer.id,
-          email: customer.email,
-          name: customer.name,
+          email: customer.email || null,
+          name: customer.name || null,
           created: customer.created,
-          currency: customer.currency,
+          currency: customer.currency || null,
           metadata: customer.metadata,
-          defaultSource: customerAny.default_source as string | null,
+          defaultSource: customerAny.default_source || null,
           delinquent: customer.delinquent || false,
         });
       }
@@ -236,12 +236,12 @@ export class StripeService {
 
       return {
         id: customer.id,
-        email: customer.email,
-        name: customer.name,
+        email: customer.email || null,
+        name: customer.name || null,
         created: customer.created,
-        currency: customer.currency,
+        currency: customer.currency || null,
         metadata: customer.metadata,
-        defaultSource: customerAny.default_source as string | null,
+        defaultSource: customerAny.default_source || null,
         delinquent: customer.delinquent || false,
       };
     } catch (error) {
@@ -280,15 +280,15 @@ export class StripeService {
           subscription: typeof invoice.subscription === 'string' ? invoice.subscription : invoice.subscription?.id || null,
           status: invoice.status as any,
           created: invoice.created,
-          dueDate: invoiceAny.due_date,
-          amountDue: invoiceAny.amount_due,
-          amountPaid: invoiceAny.amount_paid,
-          amountRemaining: invoiceAny.amount_remaining,
+          dueDate: invoiceAny.due_date || null,
+          amountDue: invoiceAny.amount_due || 0,
+          amountPaid: invoiceAny.amount_paid || 0,
+          amountRemaining: invoiceAny.amount_remaining || 0,
           currency: invoice.currency,
-          periodStart: invoiceAny.period_start,
-          periodEnd: invoiceAny.period_end,
-          hostedInvoiceUrl: invoiceAny.hosted_invoice_url,
-          invoicePdf: invoiceAny.invoice_pdf,
+          periodStart: invoiceAny.period_start || null,
+          periodEnd: invoiceAny.period_end || null,
+          hostedInvoiceUrl: invoiceAny.hosted_invoice_url || null,
+          invoicePdf: invoiceAny.invoice_pdf || null,
           metadata: invoice.metadata,
         });
       }
