@@ -232,17 +232,23 @@ export class StripeService {
 
     try {
       const customer = await stripe.customers.retrieve(customerId);
+
+      // Check if customer is deleted
+      if ((customer as any).deleted) {
+        return null;
+      }
+
       const customerAny = customer as any;
 
       return {
         id: customer.id,
-        email: customer.email || null,
-        name: customer.name || null,
-        created: customer.created,
-        currency: customer.currency || null,
-        metadata: customer.metadata,
+        email: customerAny.email || null,
+        name: customerAny.name || null,
+        created: customerAny.created,
+        currency: customerAny.currency || null,
+        metadata: customerAny.metadata || {},
         defaultSource: customerAny.default_source || null,
-        delinquent: customer.delinquent || false,
+        delinquent: customerAny.delinquent || false,
       };
     } catch (error) {
       if ((error as any).code === 'resource_missing') {
