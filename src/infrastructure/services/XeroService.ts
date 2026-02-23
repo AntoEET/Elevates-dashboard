@@ -201,15 +201,29 @@ export class XeroService {
     const transactions = response.body.bankTransactions || [];
 
     return transactions
-      .filter((tx) => tx.bankTransactionID && tx.date)
+      .filter((tx) => tx.bankTransactionID && tx.date && tx.type)
       .map((tx) => ({
-        transactionID: tx.bankTransactionID!,
+        bankTransactionID: tx.bankTransactionID!,
+        type: String(tx.type) as 'SPEND' | 'RECEIVE',
+        contact: tx.contact ? {
+          contactID: tx.contact.contactID,
+          name: tx.contact.name,
+        } : undefined,
         date: tx.date!,
         reference: tx.reference,
         isReconciled: tx.isReconciled || false,
-        amount: tx.total || 0,
-        accountCode: tx.bankAccount?.code || '',
-        description: tx.lineItems?.[0]?.description,
+        status: String(tx.status || 'ACTIVE'),
+        total: tx.total || 0,
+        currencyCode: String(tx.currencyCode || 'GBP'),
+        lineItems: (tx.lineItems || []).map((item) => ({
+          description: item.description,
+          quantity: item.quantity,
+          unitAmount: item.unitAmount || 0,
+          accountCode: item.accountCode || '',
+          taxType: item.taxType,
+          taxAmount: item.taxAmount,
+          lineAmount: item.lineAmount || 0,
+        })),
       }));
   }
 
