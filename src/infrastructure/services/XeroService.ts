@@ -25,7 +25,8 @@ export class XeroService {
       scopes: 'openid profile email accounting.transactions accounting.reports.read accounting.settings'.split(' '),
     });
 
-    this.tokensPath = path.join(process.cwd(), 'src', 'data', 'integrations', 'xero-tokens', 'tokens.json');
+    // Use /tmp directory for serverless environments (Vercel)
+    this.tokensPath = path.join('/tmp', 'xero-tokens.json');
   }
 
   // ============================================================================
@@ -116,8 +117,7 @@ export class XeroService {
    * Save tokens to file
    */
   private async saveTokens(tokens: XeroTokens): Promise<void> {
-    const dir = path.dirname(this.tokensPath);
-    await fs.mkdir(dir, { recursive: true });
+    // /tmp directory already exists in serverless environments, no need to create it
     await fs.writeFile(this.tokensPath, JSON.stringify(tokens, null, 2));
   }
 

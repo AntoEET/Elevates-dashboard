@@ -16,14 +16,8 @@ export class StripeService {
   private metadataPath: string;
 
   constructor() {
-    this.metadataPath = path.join(
-      process.cwd(),
-      'src',
-      'data',
-      'integrations',
-      'stripe-tokens',
-      'metadata.json'
-    );
+    // Use /tmp directory for serverless environments (Vercel)
+    this.metadataPath = path.join('/tmp', 'stripe-metadata.json');
 
     // Initialize Stripe if key is available
     if (process.env.STRIPE_SECRET_KEY) {
@@ -375,8 +369,7 @@ export class StripeService {
    * Save sync metadata
    */
   async saveSyncMetadata(lastSyncAt: Date): Promise<void> {
-    const dir = path.dirname(this.metadataPath);
-    await fs.mkdir(dir, { recursive: true });
+    // /tmp directory already exists in serverless environments, no need to create it
     await fs.writeFile(
       this.metadataPath,
       JSON.stringify({ lastSyncAt: lastSyncAt.toISOString() }, null, 2)
