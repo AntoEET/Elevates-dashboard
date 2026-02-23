@@ -159,7 +159,22 @@ export class XeroService {
     const tenantId = await this.getTenantId();
 
     const response = await this.client.accountingApi.getAccounts(tenantId);
-    return response.body.accounts || [];
+    const accounts = response.body.accounts || [];
+
+    return accounts
+      .filter((acc) => acc.accountID && acc.code && acc.name && acc.type)
+      .map((acc) => ({
+        accountID: acc.accountID!,
+        code: acc.code!,
+        name: acc.name!,
+        type: acc.type as any,
+        currencyCode: acc.currencyCode || 'GBP',
+        taxType: acc.taxType,
+        enablePaymentsToAccount: acc.enablePaymentsToAccount,
+        bankAccountNumber: acc.bankAccountNumber,
+        status: acc.status,
+        description: acc.description,
+      }));
   }
 
   /**
@@ -183,7 +198,19 @@ export class XeroService {
       where.length > 0 ? where.join(' AND ') : undefined
     );
 
-    return response.body.bankTransactions || [];
+    const transactions = response.body.bankTransactions || [];
+
+    return transactions
+      .filter((tx) => tx.bankTransactionID && tx.date)
+      .map((tx) => ({
+        transactionID: tx.bankTransactionID!,
+        date: tx.date!,
+        reference: tx.reference,
+        isReconciled: tx.isReconciled || false,
+        amount: tx.total || 0,
+        accountCode: tx.bankAccount?.code || '',
+        description: tx.lineItems?.[0]?.description,
+      }));
   }
 
   /**
